@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import pages.LoginPage;
+import pages.MainPage;
+import pages.NewAccountPage;
 
 import java.util.HashMap;
 
@@ -15,6 +18,9 @@ import java.util.HashMap;
 public class BaseTest {
 
     WebDriver driver;
+    LoginPage loginPage;
+    MainPage mainPage;
+    NewAccountPage newAccountPage;
 
     @Parameters({"browser"})
     @BeforeMethod(
@@ -39,6 +45,10 @@ public class BaseTest {
         }
 
         iTestContext.setAttribute("driver", driver);
+
+        loginPage = new LoginPage(driver);
+        mainPage = new MainPage(driver);
+        newAccountPage = new NewAccountPage(driver);
     }
 
     @AfterMethod(

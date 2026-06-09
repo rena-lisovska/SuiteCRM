@@ -1,5 +1,6 @@
 package pages;
 
+import dto.Account;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
@@ -37,16 +38,25 @@ public class AccountNewPage extends BasePage {
     }
 
     @Step("Creating New Account")
-    public AccountNewPage createAccount(String name, String phone, String fax, String email, String billingStreet, String shippingStreet, String description, String type, String industry) {
-        new Input(driver, "Name").write(name);
-        new Input(driver, "Office Phone").write(phone);
-        new Input(driver, "Fax").write(fax);
-        new Email(driver, "Email Address").write(email);
-        new TextArea(driver, "Billing Address", "Street").writeAddress(billingStreet);
-        new TextArea(driver, "Shipping Address", "Street").writeAddress(shippingStreet);
-        new TextArea(driver, "Description").write(description);
-        new Select(driver, "Type").select(type);
-        new Select(driver, "Industry").select(industry);
+    public AccountNewPage createAccount(Account account) {
+        new Input(driver, "Name").write(account.getName());
+        new Input(driver, "Office Phone").write(account.getPhone());
+        new Input(driver, "Website").write(account.getWebsite());
+        new Input(driver, "Fax").write(account.getFax());
+        new Email(driver, "Email Address").write(account.getEmail_address());
+        new TextArea(driver, "Billing Address", "Street").writeAddress(account.getBillingStreet());
+        new TextArea(driver, "Shipping Address", "Street").writeAddress(account.getShippingStreet());
+        new Input(driver, "Billing Address", "City").writeAddress(account.getBillingCity());
+        new Input(driver, "Shipping Address", "City").writeAddress(account.getShippingCity());
+        new Input(driver, "Billing Address", "State/Region").writeAddress(account.getBillingState());
+        new Input(driver, "Shipping Address", "State/Region").writeAddress(account.getShippingState());
+        new Input(driver, "Billing Address", "Postal Code").writeAddress(account.getBillingPostalCode());
+        new Input(driver, "Shipping Address", "Postal Code").writeAddress(account.getShippingPostalCode());
+        new Input(driver, "Billing Address", "Country").writeAddress(account.getBillingCountry());
+        new Input(driver, "Shipping Address", "Country").writeAddress(account.getShippingCountry());
+        new TextArea(driver, "Description").write(account.getDescription());
+        new Select(driver, "Type").select(account.getType());
+        new Select(driver, "Industry").select(account.getIndustry());
         return this;
     }
 

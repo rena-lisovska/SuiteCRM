@@ -9,9 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.AccountModulePage;
-import pages.LoginPage;
-import pages.MainPage;
-import pages.AccountNewPage;
+import steps.AccountStep;
+import steps.LoginStep;
 
 import java.util.HashMap;
 
@@ -19,10 +18,9 @@ import java.util.HashMap;
 public class BaseTest {
 
     WebDriver driver;
-    LoginPage loginPage;
-    MainPage mainPage;
-    AccountNewPage accountNewPage;
     AccountModulePage accountModulePage;
+    LoginStep loginStep;
+    AccountStep accountStep;
 
     @Parameters({"browser"})
     @BeforeMethod(
@@ -48,10 +46,9 @@ public class BaseTest {
 
         iTestContext.setAttribute("driver", driver);
 
-        loginPage = new LoginPage(driver);
-        mainPage = new MainPage(driver);
-        accountNewPage = new AccountNewPage(driver);
         accountModulePage = new AccountModulePage(driver);
+        loginStep = new LoginStep(driver);
+        accountStep = new AccountStep(driver);
     }
 
     @AfterMethod(

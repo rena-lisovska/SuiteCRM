@@ -4,6 +4,7 @@ import dto.Account;
 import org.testng.annotations.Test;
 
 import static dto.AccountFactory.getAccount;
+import static org.testng.Assert.assertEquals;
 
 public class AddAccountTest extends BaseTest {
     Account account = getAccount(
@@ -12,13 +13,11 @@ public class AddAccountTest extends BaseTest {
 
     @Test
     public void checkAddAccount() {
-        loginPage.open()
-                .isPageOpened()
-                .loginWithPositiveCred("will", "will")
-                .isPageOpened()
-                .openNewAccount()
-                .isPageOpened()
-                .createAccount(account)
-                .saveNewAccount();
+        loginStep.auth("will", "will");
+        accountStep.createAccount(account);
+        assertEquals(
+                accountModulePage.getAccountName().toLowerCase(),
+                account.getName().toLowerCase(),
+                "Account name does not match");
     }
 }

@@ -11,6 +11,11 @@ public class AddAccountTest extends BaseTest {
             "Integrator",
             "Energy");
 
+    Account account1 = Account.builder()
+            .name("Test")
+            .phone("+9991234567")
+            .build();
+
     @Test
     public void checkAddAccount() {
         loginStep.auth("will", "will");

@@ -64,7 +64,7 @@ public class LoginPage extends BasePage {
 
     @Step("Error message for invalid credentials on loginPage")
     public String getErrorMessage() {
-        log.info("Displaying an error message when the login is incorrect");
+        log.error("Displaying an error message when the login is incorrect");
         return ERROR_MESSAGE.getText();
     }
 }

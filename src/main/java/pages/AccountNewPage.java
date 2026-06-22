@@ -39,6 +39,7 @@ public class AccountNewPage extends BasePage {
 
     @Step("Creating New Account")
     public AccountNewPage createAccount(Account account) {
+        log.info("Account creation");
         new Input(driver, "Name").write(account.getName());
         new Input(driver, "Office Phone").write(account.getPhone());
         new Input(driver, "Website").write(account.getWebsite());

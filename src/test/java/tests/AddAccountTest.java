@@ -1,11 +1,28 @@
 package tests;
 
+import dto.Account;
 import org.testng.annotations.Test;
 
-public class AddAccountTest {
+import static dto.AccountFactory.getAccount;
+import static org.testng.Assert.assertEquals;
+
+public class AddAccountTest extends BaseTest {
+    Account account = getAccount(
+            "Integrator",
+            "Energy");
+
+    Account account1 = Account.builder()
+            .name("Test")
+            .phone("+9991234567")
+            .build();
 
     @Test
-    public void checkAddAccount(){
-
+    public void checkAddAccount() {
+        loginStep.auth("will", "will");
+        accountStep.createAccount(account);
+        assertEquals(
+                accountModulePage.getAccountName().toLowerCase(),
+                account.getName().toLowerCase(),
+                "Account name does not match");
     }
 }

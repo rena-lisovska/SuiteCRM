@@ -5,7 +5,6 @@ set -e
 MODEL="gemini-3.8-flash"
 CONFIG_FILE="${PWD}/config.properties"
 
-# Читаем выделенный код из stdin
 CODE="$(cat | tr -d '\r')"
 
 if [ -z "$CODE" ]; then
@@ -13,7 +12,6 @@ if [ -z "$CODE" ]; then
     exit 0
 fi
 
-# Читаем GEMINI_API_KEY из config.properties
 if [ ! -f "$CONFIG_FILE" ]; then
     echo "ERROR: config.properties not found: $CONFIG_FILE"
     exit 1
@@ -31,7 +29,6 @@ while IFS= read -r line || [ -n "$line" ]; do
     esac
 done < "$CONFIG_FILE"
 
-# Убираем пробелы в начале и конце значения
 GEMINI_API_KEY="$(printf '%s' "$GEMINI_API_KEY" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
 
 if [ -z "$GEMINI_API_KEY" ]; then
@@ -39,7 +36,6 @@ if [ -z "$GEMINI_API_KEY" ]; then
     exit 1
 fi
 
-# Формируем промпт для ревью
 PROMPT=$(cat <<EOF
 Ты — опытный Java-разработчик и QA Automation Engineer.
 Проведи Code Review предоставленного кода.

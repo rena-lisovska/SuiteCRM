@@ -1,4 +1,4 @@
-name: testRigor E2E
+name: TestRigor autotests
 
 on:
   workflow_dispatch:
